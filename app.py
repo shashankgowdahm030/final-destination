@@ -5,7 +5,6 @@ import requests
 import sqlite3
 import string
 import io
-import pandas as pd
 
 
 from flask import (
