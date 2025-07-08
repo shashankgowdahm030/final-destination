@@ -43,13 +43,13 @@ def send_otp_to_telegram(phone):
     url = f"https://api.telegram.org/bot{bot_api}/sendMessage"
     payload = {'chat_id': chat_id, 'text': message}
 
-   try:
-    response = requests.post(url, data=payload, timeout=10)
-    response.raise_for_status()
-    return True
-except requests.RequestException as e:
-    print("Telegram send failed:", e)
-    return False
+    try:
+        requests.post(url, data=payload)
+        return True
+    except Exception as e:
+        print("Telegram send failed:", e)
+        return False
+
 
 
 def login_required(f):
