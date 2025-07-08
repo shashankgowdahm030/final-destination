@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RufiTrendz – Shipping Policy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-green: #013220;
+      --dark-maroon: #6b1e1e;
+      --light-bg: #f5f5f5;
+      --font-title: 'Playfair Display', serif;
+      --font-body: 'Open Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--light-bg);
+      color: #222;
+      line-height: 1.6;
+      padding-bottom: 80px; /* To make room for fixed footer */
+    }
+
+    header {
+      background-color: var(--dark-green);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-family: 'Abril Fatface', serif;
+      font-size: 28px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--dark-maroon);
+    }
+
+    .shipping-policy {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .shipping-policy h2 {
+      font-family: var(--font-title);
+      font-size: 30px;
+      color: var(--dark-green);
+      margin-bottom: 20px;
+    }
+
+    .shipping-policy p {
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: var(--dark-maroon);
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 14px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    .socials a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .socials a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+    <a href="/" class="d-inline-block me-3">
+      <img src="{{ url_for('static', filename='uploads/mini.png') }}"
+           alt="Rufi Trendz Logo"
+           style="height: 60px; width: auto;">
+    </a>
+     <nav>
+      <a href="/">Home</a>
+    </nav>
+</header>
+
+<section class="shipping-policy">
+  <h2>Shipping Policy</h2>
+  <p><strong>Shipping Locations:</strong> We offer shipping to all locations within India.</p>
+  <p><strong>Order Processing & Delivery Time:</strong> We process all orders within 1–2 business days of receiving the order. We will deliver our products within a span of minimum 3–7 days. Orders placed on weekends or holidays will be processed the next business day.</p>
+  <p>This time may vary due to courier services in delivery area, inaccessibility of delivery area, or force majeure events in and around the delivery area.</p>
+</section>
+
+<footer id="contact">
+  <p>Contact us: <a href="tel:+919606888430" style="color:#fff;">+91-96068-88430</a> | <a href="mailto:support@rufitrendz.in" style="color:#fff;">support@rufitrendz.in</a></p>
+  <div class="socials">
+    <a href="https://instagram.com/rufitrendz" >Instagram</a> |
+    <a href="https://www.facebook.com/people/Rufi-Trendz/61561238205580/" >Facebook</a> |
+    <a href="https://t.me/+HgH8PeaquBA0OWI1" >Telegram</a> |
+    <a href="https://whatsapp.com/channel/0029VbAksvq17EmsiMQm7k1q">WhatsApp</a>
+  </div>
+<p style="margin-top: 20px;">
+  &copy; 2025, <strong>RUFITRENDZ</strong> |
+  <a href="{{ url_for('faq') }}" style="text-decoration: none; color: inherit;">FAQ</a> |
+  <a href="{{ url_for('privacy') }}" style="text-decoration: none; color: inherit;">Privacy Policy</a> |
+  <a href="{{ url_for('refund') }}" style="text-decoration: none; color: inherit;">Refund Policy</a> |
+  <a href="{{ url_for('terms') }}" style="text-decoration: none; color: inherit;">Terms of Service</a> |
+  <a href="{{ url_for('shipping') }}" style="text-decoration: none; color: inherit;">Shipping Policy</a> |
+  <a href="https://rufitrendz.online/pages/contact" style="text-decoration: none; color: inherit;">Contact Information</a>
+</p>
+</footer>
+
+</body>
+</html>

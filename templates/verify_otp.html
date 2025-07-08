@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verify OTP - RufiTrendz</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Open+Sans&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --dark-green: #013220;
+      --dark-maroon: #6b1e1e;
+      --light-bg: #f5f5f5;
+      --font-title: 'Playfair Display', serif;
+      --font-body: 'Open Sans', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--light-bg);
+      color: #222;
+    }
+
+    header {
+      background-color: var(--dark-green);
+      color: white;
+      padding: 20px 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: var(--font-title);
+      font-size: 28px;
+      margin: 0;
+    }
+
+    .otp-container {
+      max-width: 480px;
+      margin: 60px auto;
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    }
+
+    .otp-container h2 {
+      font-family: var(--font-title);
+      color: var(--dark-green);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .form-label {
+      font-weight: 600;
+    }
+
+    .btn-success {
+      background-color: var(--dark-green);
+      border-color: var(--dark-green);
+    }
+
+    .btn-success:hover {
+      background-color: var(--dark-maroon);
+      border-color: var(--dark-maroon);
+    }
+
+    footer {
+      background: var(--dark-maroon);
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 576px) {
+      .otp-container {
+        margin: 30px 15px;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <h1>RufiTrendz</h1>
+</header>
+
+<!-- OTP Verification Form -->
+<div class="container">
+  <div class="otp-container">
+    <h2>OTP Verification</h2>
+
+    <!-- Static warning block or replace with Jinja flash in Flask -->
+    <div id="otp-warning" class="alert alert-danger d-none" role="alert">
+      You are not an admin or invalid OTP entered!
+    </div>
+
+    <form method="POST" action="/verify-otp" onsubmit="return validateOTP()">
+      <div class="mb-3">
+        <label for="otp" class="form-label">Enter OTP sent to Telegram</label>
+        <input type="text" class="form-control" id="otp" name="otp" required>
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-success">Verify OTP</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Optional JS -->
+<script>
+  function validateOTP() {
+    const otp = document.getElementById('otp').value.trim();
+    if (!otp || otp.length < 4) {
+      const warning = document.getElementById('otp-warning');
+      warning.classList.remove('d-none');
+      warning.textContent = "Please enter a valid OTP.";
+      return false; // prevent form submission
+    }
+    return true;
+  }
+
+  // Optional: auto-hide error after 5 seconds
+  setTimeout(() => {
+    const warning = document.getElementById('otp-warning');
+    if (!warning.classList.contains('d-none')) {
+      warning.classList.add('d-none');
+    }
+  }, 5000);
+</script>
+
+</body>
+</html>
