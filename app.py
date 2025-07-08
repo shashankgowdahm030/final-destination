@@ -44,12 +44,14 @@ def send_otp_to_telegram(phone):
     url = f"https://api.telegram.org/bot{bot_api}/sendMessage"
     payload = {'chat_id': chat_id, 'text': message}
 
-    try:
-        requests.post(url, data=payload)
-        return True
-    except Exception as e:
-        print("Telegram send failed:", e)
-        return False
+   try:
+    response = requests.post(url, data=payload, timeout=10)
+    response.raise_for_status()
+    return True
+except requests.RequestException as e:
+    print("Telegram send failed:", e)
+    return False
+
 
 def login_required(f):
     @wraps(f)
@@ -59,18 +61,22 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-def generate_random_filename(extension):
-    random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
-    return f"{random_str}.{extension}"
+# Generate a random filename with a given extension (e.g., jpg, png)
+def generate_random_filename(extension: str, length: int = 10) -> str:
+    random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+    return f"{random_str}.{extension.lower()}"
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
+# Check if the uploaded file has an allowed extension
+def allowed_file(filename: str) -> bool:
+    allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[-1].lower() in allowed_extensions
 
-def generate_unique_filename(extension, length=30):
+# Generate a unique filename that does not already exist in the upload folder
+def generate_unique_filename(extension: str, upload_folder: str, length: int = 30) -> str:
     while True:
-        random_name = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-        filename = f"{random_name}.{extension}"
-        full_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+        filename = f"{random_str}.{extension.lower()}"
+        full_path = os.path.join(upload_folder, filename)
         if not os.path.exists(full_path):
             return filename
 
